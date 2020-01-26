@@ -40,7 +40,7 @@ enum PayrollDay {
     }
 
     public static void main(String[] args) {
-        for (PayrollDay day : values())
+        for (var day : values())
             System.out.printf("%-10s%d%n", day, day.pay(8 * 60, 1));
     }
 }

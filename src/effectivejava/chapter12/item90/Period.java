@@ -32,17 +32,10 @@ public final class Period implements Serializable {
 
 
     // Serialization proxy for Period class
-    private static class SerializationProxy implements Serializable {
-        private final Date start;
-        private final Date end;
-
-        SerializationProxy(Period p) {
-            this.start = p.start;
-            this.end = p.end;
+    private record SerializationProxy(Date start, Date end) implements Serializable {
+        private SerializationProxy(Period p) {
+            this(p.start, p.end);
         }
-
-        private static final long serialVersionUID =
-                234098243823485285L; // Any number will do (Item 87)
     }
 
     // writeReplace method for the serialization proxy pattern

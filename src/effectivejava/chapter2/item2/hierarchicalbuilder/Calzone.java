@@ -1,9 +1,10 @@
 package effectivejava.chapter2.item2.hierarchicalbuilder;
 
-// Subclass with hierarchical builder (Page 15)
-public class Calzone extends Pizza {
-    private final boolean sauceInside;
+import java.util.Collections;
+import java.util.Set;
 
+// Subtype with hierarchical builder (Page 15)
+public record Calzone(Set<Topping>toppings, boolean sauceInside) implements Pizza {
     public static class Builder extends Pizza.Builder<Builder> {
         private boolean sauceInside = false; // Default
 
@@ -16,16 +17,14 @@ public class Calzone extends Pizza {
             return new Calzone(this);
         }
 
-        @Override protected Builder self() { return this; }
+        @Override Builder self() { return this; }
     }
 
     private Calzone(Builder builder) {
-        super(builder);
-        sauceInside = builder.sauceInside;
+        this(builder.toppings.clone(), builder.sauceInside);
     }
 
-    @Override public String toString() {
-        return String.format("Calzone with %s and sauce on the %s",
-                toppings, sauceInside ? "inside" : "outside");
+    public Set<Topping> toppings() {
+        return Collections.unmodifiableSet(toppings);
     }
 }

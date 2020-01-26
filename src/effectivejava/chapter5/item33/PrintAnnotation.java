@@ -6,10 +6,10 @@ import java.lang.reflect.*;
 public class PrintAnnotation {
     static Annotation getAnnotation(AnnotatedElement element,
                                     String annotationTypeName) {
-        Class<?> annotationType = null; // Unbounded type token
+        Class<?> annotationType; // Unbounded type token
         try {
             annotationType = Class.forName(annotationTypeName);
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException ex) {
             throw new IllegalArgumentException(ex);
         }
         return element.getAnnotation(
@@ -23,9 +23,9 @@ public class PrintAnnotation {
                 "Usage: java PrintAnnotation <class> <annotation>");
             System.exit(1);
         }
-        String className = args[0];
-        String annotationTypeName = args[1]; 
-        Class<?> klass = Class.forName(className);
+        var className = args[0];
+        var annotationTypeName = args[1];
+        var klass = Class.forName(className);
         System.out.println(getAnnotation(klass, annotationTypeName));
     }
 }

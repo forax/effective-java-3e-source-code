@@ -11,7 +11,7 @@ import static java.util.Comparator.comparingInt;
 // Sorting with function objects (Pages 193-4)
 public class SortFourWays {
     public static void main(String[] args) {
-        List<String> words = Arrays.asList(args);
+        var words = Arrays.asList(args);
 
         // Anonymous class instance as a function object - obsolete! (Page 193)
         Collections.sort(words, new Comparator<String>() {

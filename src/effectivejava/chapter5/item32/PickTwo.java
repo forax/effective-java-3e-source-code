@@ -11,16 +11,16 @@ public class PickTwo {
     }
 
     static <T> T[] pickTwo(T a, T b, T c) {
-        switch(ThreadLocalRandom.current().nextInt(3)) {
-            case 0: return toArray(a, b);
-            case 1: return toArray(a, c);
-            case 2: return toArray(b, c);
-        }
-        throw new AssertionError(); // Can't get here
+        return switch(ThreadLocalRandom.current().nextInt(3)) {
+            case 0 -> toArray(a, b);
+            case 1 -> toArray(a, c);
+            case 2 -> toArray(b, c);
+            default -> throw new AssertionError(); // Can't get here
+        };
     }
 
     public static void main(String[] args) {
-        String[] attributes = pickTwo("Good", "Fast", "Cheap");
+        var attributes = pickTwo("Good", "Fast", "Cheap");
         System.out.println(Arrays.toString(attributes));
     }
 }

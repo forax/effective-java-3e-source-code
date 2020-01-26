@@ -17,13 +17,13 @@ public class CollectionClassifier {
     }
 
     public static void main(String[] args) {
-        Collection<?>[] collections = {
+        var collections = new Collection<?>[] {
                 new HashSet<String>(),
                 new ArrayList<BigInteger>(),
                 new HashMap<String, String>().values()
         };
 
-        for (Collection<?> c : collections)
+        for (var c : collections)
             System.out.println(classify(c));
     }
 }

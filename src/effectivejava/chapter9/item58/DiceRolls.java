@@ -7,16 +7,16 @@ public class DiceRolls {
 
     public static void main(String[] args) {
         // Same bug, different symptom!
-        Collection<Face> faces = EnumSet.allOf(Face.class);
+        var faces = EnumSet.allOf(Face.class);
 
-        for (Iterator<Face> i = faces.iterator(); i.hasNext(); )
-            for (Iterator<Face> j = faces.iterator(); j.hasNext(); )
+        for (var i = faces.iterator(); i.hasNext(); )
+            for (var j = faces.iterator(); j.hasNext(); )
                 System.out.println(i.next() + " " + j.next());
 
         System.out.println("***************************");
 
-        for (Face f1 : faces)
-            for (Face f2 : faces)
-                System.out.println(f1 + " " + f2);
+        for (var face1 : faces)
+            for (var face2 : faces)
+                System.out.println(face1 + " " + face2);
     }
 }

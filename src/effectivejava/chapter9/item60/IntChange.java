@@ -2,9 +2,9 @@ package effectivejava.chapter9.item60;
 
 public class IntChange {
     public static void main(String[] args) {
-        int itemsBought = 0;
-        int funds = 100;
-        for (int price = 10; funds >= price; price += 10) {
+        var itemsBought = 0;
+        var funds = 100;
+        for (var price = 10; funds >= price; price += 10) {
             funds -= price;
             itemsBought++;
         }

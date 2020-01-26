@@ -7,8 +7,8 @@ public class StopThread {
 
     public static void main(String[] args)
             throws InterruptedException {
-        Thread backgroundThread = new Thread(() -> {
-            int i = 0;
+        var backgroundThread = new Thread(() -> {
+            var i = 0;
             while (!stopRequested)
                 i++;
         });

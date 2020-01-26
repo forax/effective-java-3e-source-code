@@ -7,14 +7,13 @@ public final class StringList implements Serializable {
     private transient Entry head = null;
 
     // No longer Serializable!
-    private static class Entry {
-        String data;
-        Entry  next;
-        Entry  previous;
+    private record Entry(String data, Entry next) {
     }
 
     // Appends the specified string to the list
-    public final void add(String s) {  }
+    public void add(String s) {
+        head = new Entry(s, head);
+    }
 
     /**
      * Serialize this {@code StringList} instance.
@@ -30,17 +29,17 @@ public final class StringList implements Serializable {
         s.writeInt(size);
 
         // Write out all elements in the proper order.
-        for (Entry e = head; e != null; e = e.next)
-            s.writeObject(e.data);
+        for (var entry = head; entry != null; entry = entry.next)
+            s.writeObject(entry.data);
     }
 
     private void readObject(ObjectInputStream s)
             throws IOException, ClassNotFoundException {
         s.defaultReadObject();
-        int numElements = s.readInt();
+        var numElements = s.readInt();
 
         // Read in all elements and insert them in list
-        for (int i = 0; i < numElements; i++)
+        for (var i = 0; i < numElements; i++)
             add((String) s.readObject());
     }
 

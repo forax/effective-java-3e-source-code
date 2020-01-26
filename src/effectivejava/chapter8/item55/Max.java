@@ -9,7 +9,7 @@ public class Max {
 //        if (c.isEmpty())
 //            throw new IllegalArgumentException("Empty collection");
 //
-//        E result = null;
+//        var result = null;
 //        for (E e : c)
 //            if (result == null || e.compareTo(result) > 0)
 //                result = Objects.requireNonNull(e);
@@ -23,7 +23,7 @@ public class Max {
 //        if (c.isEmpty())
 //            return Optional.empty();
 //
-//        E result = null;
+//        var result = null;
 //        for (E e : c)
 //            if (result == null || e.compareTo(result) > 0)
 //                result = Objects.requireNonNull(e);
@@ -38,7 +38,7 @@ public class Max {
     }
 
     public static void main(String[] args) {
-        List<String> words = Arrays.asList(args);
+        var words = List.of(args);
 
         System.out.println(max(words));
 

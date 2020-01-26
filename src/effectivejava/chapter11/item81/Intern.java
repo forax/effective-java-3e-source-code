@@ -8,13 +8,13 @@ public class Intern {
             new ConcurrentHashMap<>();
 
 //    public static String intern(String s) {
-//        String previousValue = map.putIfAbsent(s, s);
+//        var previousValue = map.putIfAbsent(s, s);
 //        return previousValue == null ? s : previousValue;
 //    }
 
     // Concurrent canonicalizing map atop ConcurrentMap - faster!
     public static String intern(String s) {
-        String result = map.get(s);
+        var result = map.get(s);
         if (result == null) {
             result = map.putIfAbsent(s, s);
             if (result == null)

@@ -19,15 +19,13 @@ public final class PhoneNumber {
     @Override public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof effectivejava.chapter3.item11.PhoneNumber))
-            return false;
-        PhoneNumber pn = (PhoneNumber)o;
-        return pn.lineNum == lineNum && pn.prefix == prefix
+        return o instanceof PhoneNumber pn
+                && pn.lineNum == lineNum && pn.prefix == prefix
                 && pn.areaCode == areaCode;
     }
 
     @Override public int hashCode() {
-        int result = Short.hashCode(areaCode);
+        var result = Short.hashCode(areaCode);
         result = 31 * result + Short.hashCode(prefix);
         result = 31 * result + Short.hashCode(lineNum);
         return result;
@@ -51,7 +49,7 @@ public final class PhoneNumber {
 //    }
 
     public static void main(String[] args) {
-        PhoneNumber jenny = new PhoneNumber(707, 867, 5309);
+        var jenny = new PhoneNumber(707, 867, 5309);
         System.out.println("Jenny's number: " + jenny);
     }
 }

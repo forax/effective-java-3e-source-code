@@ -6,15 +6,12 @@ import static java.util.stream.Collectors.toSet;
 // Using an EnumMap to associate data with an enum (Pages 171-3)
 
 // Simplistic class representing a plant (Page 171)
-class Plant {
+record Plant(String name, LifeCycle lifeCycle) {
     enum LifeCycle { ANNUAL, PERENNIAL, BIENNIAL }
 
-    final String name;
-    final LifeCycle lifeCycle;
-
-    Plant(String name, LifeCycle lifeCycle) {
-        this.name = name;
-        this.lifeCycle = lifeCycle;
+    public Plant {
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(lifeCycle);
     }
 
     @Override public String toString() {
@@ -22,7 +19,7 @@ class Plant {
     }
 
     public static void main(String[] args) {
-        Plant[] garden = {
+        var garden = new Plant[] {
             new Plant("Basil",    LifeCycle.ANNUAL),
             new Plant("Carroway", LifeCycle.BIENNIAL),
             new Plant("Dill",     LifeCycle.ANNUAL),
@@ -32,12 +29,11 @@ class Plant {
         };
 
         // Using ordinal() to index into an array - DON'T DO THIS!  (Page 171)
-        Set<Plant>[] plantsByLifeCycleArr =
-                (Set<Plant>[]) new Set[Plant.LifeCycle.values().length];
-        for (int i = 0; i < plantsByLifeCycleArr.length; i++)
-            plantsByLifeCycleArr[i] = new HashSet<>();
-        for (Plant p : garden)
-            plantsByLifeCycleArr[p.lifeCycle.ordinal()].add(p);
+        var plantsByLifeCycleArr =
+                (Set<Plant>[]) new Set<?>[Plant.LifeCycle.values().length];
+        Arrays.setAll(plantsByLifeCycleArr, __ -> new HashSet<>());
+        for (var plant : garden)
+            plantsByLifeCycleArr[plant.lifeCycle.ordinal()].add(plant);
         // Print the results
         for (int i = 0; i < plantsByLifeCycleArr.length; i++) {
             System.out.printf("%s: %s%n",
@@ -45,12 +41,10 @@ class Plant {
         }
 
         // Using an EnumMap to associate data with an enum (Page 172)
-        Map<Plant.LifeCycle, Set<Plant>> plantsByLifeCycle =
-                new EnumMap<>(Plant.LifeCycle.class);
-        for (Plant.LifeCycle lc : Plant.LifeCycle.values())
-            plantsByLifeCycle.put(lc, new HashSet<>());
-        for (Plant p : garden)
-            plantsByLifeCycle.get(p.lifeCycle).add(p);
+        var plantsByLifeCycle =
+                new EnumMap<Plant.LifeCycle, Set<Plant>>(Plant.LifeCycle.class);
+        for (var plant : garden)
+            plantsByLifeCycle.computeIfAbsent(plant.lifeCycle, __ -> new HashSet<>()).add(plant);
         System.out.println(plantsByLifeCycle);
 
         // Naive stream-based approach - unlikely to produce an EnumMap!  (Page 172)

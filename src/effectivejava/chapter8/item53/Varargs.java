@@ -6,8 +6,8 @@ import java.util.stream.IntStream;
 public class Varargs {
     // Simple use of varargs (Page 245)
     static int sum(int... args) {
-        int sum = 0;
-        for (int arg : args)
+        var sum = 0;
+        for (var arg : args)
             sum += arg;
         return sum;
     }
@@ -16,8 +16,8 @@ public class Varargs {
 //    static int min(int... args) {
 //        if (args.length == 0)
 //            throw new IllegalArgumentException("Too few arguments");
-//        int min = args[0];
-//        for (int i = 1; i < args.length; i++)
+//        var min = args[0];
+//        for (var i = 1; i < args.length; i++)
 //            if (args[i] < min)
 //                min = args[i];
 //        return min;
@@ -25,8 +25,8 @@ public class Varargs {
 
     // The right way to use varargs to pass one or more arguments (Page 246)
     static int min(int firstArg, int... remainingArgs) {
-        int min = firstArg;
-        for (int arg : remainingArgs)
+        var min = firstArg;
+        for (var arg : remainingArgs)
             if (arg < min)
                 min = arg;
         return min;

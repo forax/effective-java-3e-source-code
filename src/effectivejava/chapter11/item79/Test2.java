@@ -4,8 +4,8 @@ import java.util.*;
 // More complex test of ObservableSet - Page 318-9
 public class Test2 {
     public static void main(String[] args) {
-        ObservableSet<Integer> set =
-                new ObservableSet<>(new HashSet<>());
+        var set =
+                new ObservableSet<>(new HashSet<Integer>());
 
         set.addObserver(new SetObserver<>() {
             public void added(ObservableSet<Integer> s, Integer e) {
@@ -15,7 +15,7 @@ public class Test2 {
             }
         });
 
-        for (int i = 0; i < 100; i++)
+        for (var i = 0; i < 100; i++)
             set.add(i);
     }
 }

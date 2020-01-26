@@ -11,7 +11,7 @@ public class Chooser<T> {
     private final Random rnd = new Random();
 
     public Chooser(Collection<? extends T> choices) {
-        choiceList = new ArrayList<>(choices);
+        choiceList = List.copyOf(choices);
     }
 
     public T choose() {

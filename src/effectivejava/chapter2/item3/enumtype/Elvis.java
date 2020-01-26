@@ -10,7 +10,7 @@ public enum Elvis {
 
     // This code would normally appear outside the class!
     public static void main(String[] args) {
-        Elvis elvis = Elvis.INSTANCE;
+        var elvis = Elvis.INSTANCE;
         elvis.leaveTheBuilding();
     }
 }

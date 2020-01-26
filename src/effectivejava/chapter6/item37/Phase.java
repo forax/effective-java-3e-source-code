@@ -34,18 +34,17 @@ public enum Phase {
                 toMap(t -> t.to, t -> t,
                         (x, y) -> y, () -> new EnumMap<>(Phase.class))));
         
-        public static Transition from(Phase from, Phase to) {
-            return m.get(from).get(to);
+        public static Optional<Transition> from(Phase from, Phase to) {
+            return Optional.ofNullable(m.get(from).get(to));
         }
     }
 
     // Simple demo program - prints a sloppy table
     public static void main(String[] args) {
-        for (Phase src : Phase.values()) {
-            for (Phase dst : Phase.values()) {
-                Transition transition = Transition.from(src, dst);
-                if (transition != null)
-                    System.out.printf("%s to %s : %s %n", src, dst, transition);
+        for (var src : Phase.values()) {
+            for (var dst : Phase.values()) {
+                var transition = Transition.from(src, dst);
+                transition.ifPresent(t -> System.out.printf("%s to %s : %s %n", src, dst, t));
             }
         }
     }

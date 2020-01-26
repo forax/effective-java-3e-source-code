@@ -5,10 +5,10 @@ import java.util.List;
 // Classification using method overrriding (Page 239)
 public class Overriding {
     public static void main(String[] args) {
-        List<Wine> wineList = List.of(
+        var wineList = List.of(
                 new Wine(), new SparklingWine(), new Champagne());
 
-        for (Wine wine : wineList)
+        for (var wine : wineList)
             System.out.println(wine.name());
     }
 }

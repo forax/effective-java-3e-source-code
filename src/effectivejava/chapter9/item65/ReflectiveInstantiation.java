@@ -10,34 +10,34 @@ public class ReflectiveInstantiation {
     // Reflective instantiation with interface access
     public static void main(String[] args) {
         // Translate the class name into a Class object
-        Class<? extends Set<String>> cl = null;
+        Class<? extends Set<String>> cl;
         try {
             cl = (Class<? extends Set<String>>)  // Unchecked cast!
                     Class.forName(args[0]);
         } catch (ClassNotFoundException e) {
-            fatalError("Class not found.");
+            throw fatalError("Class not found.");
         }
 
         // Get the constructor
-        Constructor<? extends Set<String>> cons = null;
+        Constructor<? extends Set<String>> cons;
         try {
             cons = cl.getDeclaredConstructor();
         } catch (NoSuchMethodException e) {
-            fatalError("No parameterless constructor");
+            throw fatalError("No parameterless constructor");
         }
 
         // Instantiate the set
-        Set<String> s = null;
+        Set<String> s;
         try {
             s = cons.newInstance();
         } catch (IllegalAccessException e) {
-            fatalError("Constructor not accessible");
+            throw fatalError("Constructor not accessible");
         } catch (InstantiationException e) {
-            fatalError("Class not instantiable.");
+            throw fatalError("Class not instantiable.");
         } catch (InvocationTargetException e) {
-            fatalError("Constructor threw " + e.getCause());
+            throw fatalError("Constructor threw " + e.getCause());
         } catch (ClassCastException e) {
-            fatalError("Class doesn't implement Set");
+            throw fatalError("Class doesn't implement Set");
         }
 
         // Exercise the set
@@ -45,8 +45,9 @@ public class ReflectiveInstantiation {
         System.out.println(s);
     }
 
-    private static void fatalError(String msg) {
+    private static Error fatalError(String msg) {
         System.err.println(msg);
         System.exit(1);
+        return new AssertionError(msg);
     }
 }

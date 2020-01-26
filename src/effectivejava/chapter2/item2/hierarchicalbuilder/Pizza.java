@@ -5,24 +5,22 @@ import java.util.*;
 
 // Note that the underlying "simulated self-type" idiom  allows for arbitrary fluid hierarchies, not just builders
 
-public abstract class Pizza {
+public interface Pizza {
     public enum Topping { HAM, MUSHROOM, ONION, PEPPER, SAUSAGE }
-    final Set<Topping> toppings;
 
-    abstract static class Builder<T extends Builder<T>> {
-        EnumSet<Topping> toppings = EnumSet.noneOf(Topping.class);
+    /*private*/ abstract static class Builder<T extends Builder<T>> {
+        final EnumSet<Topping> toppings = EnumSet.noneOf(Topping.class);
         public T addTopping(Topping topping) {
-            toppings.add(Objects.requireNonNull(topping));
+            Objects.requireNonNull(topping);
+            toppings.add(topping);
             return self();
         }
 
         abstract Pizza build();
 
         // Subclasses must override this method to return "this"
-        protected abstract T self();
+        abstract T self();
     }
-    
-    Pizza(Builder<?> builder) {
-        toppings = builder.toppings.clone(); // See Item 50
-    }
+
+    Set<Topping> toppings();
 }

@@ -7,13 +7,13 @@ public class Sample3 {
     // This variant can process annotations whose parameter is a single element (identical to those on page 183)
     @ExceptionTest(ArithmeticException.class)
     public static void m1() {  // Test should pass
-        int i = 0;
+        var i = 0;
         i = i / i;
     }
     @ExceptionTest(ArithmeticException.class)
     public static void m2() {  // Should fail (wrong exception)
-        int[] a = new int[0];
-        int i = a[1];
+        var a = new int[0];
+        var i = a[1];
     }
     @ExceptionTest(ArithmeticException.class)
     public static void m3() { }  // Should fail (no exception)
@@ -22,7 +22,7 @@ public class Sample3 {
     @ExceptionTest({ IndexOutOfBoundsException.class,
                      NullPointerException.class })
     public static void doublyBad() {   // Should pass
-        List<String> list = new ArrayList<>();
+        var list = new ArrayList<String>();
 
         // The spec permits this method to throw either
         // IndexOutOfBoundsException or NullPointerException

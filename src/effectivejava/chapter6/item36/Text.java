@@ -14,7 +14,7 @@ public class Text {
 
     // Sample use
     public static void main(String[] args) {
-        Text text = new Text();
+        var text = new Text();
         text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC));
     }
 }

@@ -12,7 +12,7 @@ public class Elvis {
 
     // This code would normally appear outside the class!
     public static void main(String[] args) {
-        Elvis elvis = Elvis.getInstance();
+        var elvis = Elvis.getInstance();
         elvis.leaveTheBuilding();
     }
 }

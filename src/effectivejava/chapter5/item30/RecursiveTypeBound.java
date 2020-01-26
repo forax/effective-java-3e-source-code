@@ -9,7 +9,7 @@ public class RecursiveTypeBound {
             throw new IllegalArgumentException("Empty collection");
 
         E result = null;
-        for (E e : c)
+        for (var e : c)
             if (result == null || e.compareTo(result) > 0)
                 result = Objects.requireNonNull(e);
 
@@ -17,7 +17,7 @@ public class RecursiveTypeBound {
     }
 
     public static void main(String[] args) {
-        List<String> argList = Arrays.asList(args);
+        var argList = List.of(args);
         System.out.println(max(argList));
     }
 }

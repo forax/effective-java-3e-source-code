@@ -1,7 +1,12 @@
 package effectivejava.chapter3.item14;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import static java.util.Comparator.*;
+import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.IntStream.range;
 
 // Making PhoneNumber comparable (Pages 69-70)
 public final class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
@@ -22,15 +27,13 @@ public final class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
     @Override public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof effectivejava.chapter3.item11.PhoneNumber))
-            return false;
-        PhoneNumber pn = (PhoneNumber)o;
-        return pn.lineNum == lineNum && pn.prefix == prefix
+        return o instanceof PhoneNumber pn
+                && pn.lineNum == lineNum && pn.prefix == prefix
                 && pn.areaCode == areaCode;
     }
 
     @Override public int hashCode() {
-        int result = Short.hashCode(areaCode);
+        var result = Short.hashCode(areaCode);
         result = 31 * result + Short.hashCode(prefix);
         result = 31 * result + Short.hashCode(lineNum);
         return result;
@@ -55,7 +58,7 @@ public final class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
 
 //    // Multiple-field Comparable with primitive fields (page 69)
 //    public int compareTo(PhoneNumber pn) {
-//        int result = Short.compare(areaCode, pn.areaCode);
+//        var result = Short.compare(areaCode, pn.areaCode);
 //        if (result == 0)  {
 //            result = Short.compare(prefix, pn.prefix);
 //            if (result == 0)
@@ -75,16 +78,14 @@ public final class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
     }
 
     private static PhoneNumber randomPhoneNumber() {
-        Random rnd = ThreadLocalRandom.current();
+        var rnd = ThreadLocalRandom.current();
         return new PhoneNumber((short) rnd.nextInt(1000),
                                (short) rnd.nextInt(1000),
                                (short) rnd.nextInt(10000));
     }
 
     public static void main(String[] args) {
-        NavigableSet<PhoneNumber> s = new TreeSet<PhoneNumber>();
-        for (int i = 0; i < 10; i++)
-            s.add(randomPhoneNumber());
-        System.out.println(s);
+        var set = range(0, 10).mapToObj(__ -> randomPhoneNumber()).collect(toCollection(TreeSet::new));
+        System.out.println(set);
     }
 }

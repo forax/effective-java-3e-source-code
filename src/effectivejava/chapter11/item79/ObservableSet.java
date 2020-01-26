@@ -39,7 +39,7 @@ public class ObservableSet<E> extends ForwardingSet<E> {
 //    }
 
     // Thread-safe observable set with CopyOnWriteArrayList
-    private final List<SetObserver<E>> observers =
+    private final CopyOnWriteArrayList<SetObserver<E>> observers =
             new CopyOnWriteArrayList<>();
 
     public void addObserver(SetObserver<E> observer) {
@@ -51,20 +51,20 @@ public class ObservableSet<E> extends ForwardingSet<E> {
     }
 
     private void notifyElementAdded(E element) {
-        for (SetObserver<E> observer : observers)
+        for (var observer : observers)
             observer.added(this, element);
     }
 
     @Override public boolean add(E element) {
-        boolean added = super.add(element);
+        var added = super.add(element);
         if (added)
             notifyElementAdded(element);
         return added;
     }
 
     @Override public boolean addAll(Collection<? extends E> c) {
-        boolean result = false;
-        for (E element : c)
+        var result = false;
+        for (var element : c)
             result |= add(element);  // Calls notifyElementAdded
         return result;
     }

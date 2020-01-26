@@ -22,15 +22,13 @@ public final class PhoneNumber implements Cloneable {
     @Override public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof PhoneNumber))
-            return false;
-        PhoneNumber pn = (PhoneNumber)o;
-        return pn.lineNum == lineNum && pn.prefix == prefix
+        return o instanceof PhoneNumber pn
+                && pn.lineNum == lineNum && pn.prefix == prefix
                 && pn.areaCode == areaCode;
     }
 
     @Override public int hashCode() {
-        int result = Short.hashCode(areaCode);
+        var result = Short.hashCode(areaCode);
         result = 31 * result + Short.hashCode(prefix);
         result = 31 * result + Short.hashCode(lineNum);
         return result;
@@ -63,9 +61,8 @@ public final class PhoneNumber implements Cloneable {
     }
 
     public static void main(String[] args) {
-        PhoneNumber pn = new PhoneNumber(707, 867, 5309);
-        Map<PhoneNumber, String> m = new HashMap<>();
-        m.put(pn, "Jenny");
-        System.out.println(m.get(pn.clone()));
+        var pn = new PhoneNumber(707, 867, 5309);
+        var map = Map.of(pn, "Jenny");
+        System.out.println(map.get(pn.clone()));
     }
 }

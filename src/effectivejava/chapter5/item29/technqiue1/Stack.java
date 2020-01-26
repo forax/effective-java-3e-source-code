@@ -25,7 +25,7 @@ public class Stack<E> {
     public E pop() {
         if (size == 0)
             throw new EmptyStackException();
-        E result = elements[--size];
+        var result = elements[--size];
         elements[size] = null; // Eliminate obsolete reference
         return result;
     }
@@ -41,8 +41,8 @@ public class Stack<E> {
 
     // Little program to exercise our generic Stack
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
-        for (String arg : args)
+        var stack = new Stack<String>();
+        for (var arg : args)
             stack.push(arg);
         while (!stack.isEmpty())
             System.out.println(stack.pop().toUpperCase());

@@ -14,7 +14,7 @@ public class Swap {
 
     public static void main(String[] args) {
         // Swap the first and last argument and print the resulting list
-        List<String> argList = Arrays.asList(args);
+        var argList = Arrays.asList(args);
         swap(argList, 0, argList.size() - 1);
         System.out.println(argList);
     }

@@ -5,12 +5,12 @@ import java.util.concurrent.atomic.*;
 
 // Trivial subclass of Point - doesn't add a value component (Page 43)
 public class CounterPoint extends Point {
-    private static final AtomicInteger counter =
+    private static final AtomicInteger COUNTER =
             new AtomicInteger();
 
     public CounterPoint(int x, int y) {
         super(x, y);
-        counter.incrementAndGet();
+        COUNTER.incrementAndGet();
     }
-    public static int numberCreated() { return counter.get(); }
+    public static int numberCreated() { return COUNTER.get(); }
 }

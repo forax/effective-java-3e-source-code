@@ -28,13 +28,9 @@ class Figure {
     }
 
     double area() {
-        switch(shape) {
-            case RECTANGLE:
-                return length * width;
-            case CIRCLE:
-                return Math.PI * (radius * radius);
-            default:
-                throw new AssertionError(shape);
-        }
+        return switch(shape) {
+            case RECTANGLE -> length * width;
+            case CIRCLE -> Math.PI * (radius * radius);
+        };
     }
 }

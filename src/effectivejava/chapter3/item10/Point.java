@@ -1,6 +1,7 @@
 package effectivejava.chapter3.item10;
 
 // Simple immutable two-dimensional integer point class (Page 37)
+// Can not be a record because ColorPoint inherits of Point
 public class Point {
     private final int x;
     private final int y;
@@ -11,10 +12,7 @@ public class Point {
     }
 
     @Override public boolean equals(Object o) {
-        if (!(o instanceof Point))
-            return false;
-        Point p = (Point)o;
-        return p.x == x && p.y == y;
+        return o instanceof Point point && point.x == x && point.y == y;
     }
 
 //    // Broken - violates Liskov substitution principle (page 43)

@@ -27,7 +27,7 @@ public class Initialization {
 
     // NOTE: The code for this method in the first printing had a serious error (see errata for details)!
     private FieldType getField4() {
-        FieldType result = field4;
+        var result = field4;
         if (result != null)    // First check (no locking)
             return result;
 
@@ -44,7 +44,7 @@ public class Initialization {
     private volatile FieldType field5;
 
     private FieldType getField5() {
-        FieldType result = field5;
+        var result = field5;
         if (result == null)
             field5 = result = computeFieldValue();
         return result;

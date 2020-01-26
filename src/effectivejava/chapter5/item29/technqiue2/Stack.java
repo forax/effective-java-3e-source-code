@@ -24,7 +24,7 @@ public class Stack<E> {
             throw new EmptyStackException();
 
         // push requires elements to be of type E, so cast is correct
-        @SuppressWarnings("unchecked") E result =
+        @SuppressWarnings("unchecked") var result =
                 (E) elements[--size];
 
         elements[size] = null; // Eliminate obsolete reference
@@ -42,8 +42,8 @@ public class Stack<E> {
 
     // Little program to exercise our generic Stack
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
-        for (String arg : args)
+        var stack = new Stack<String>();
+        for (var arg : args)
             stack.push(arg);
         while (!stack.isEmpty())
             System.out.println(stack.pop().toUpperCase());

@@ -8,9 +8,9 @@ public class Room implements AutoCloseable {
 
     // Resource that requires cleaning. Must not refer to Room!
     private static class State implements Runnable {
-        int numJunkPiles; // Number of junk piles in this room
+        private int numJunkPiles; // Number of junk piles in this room
 
-        State(int numJunkPiles) {
+        private State(int numJunkPiles) {
             this.numJunkPiles = numJunkPiles;
         }
 

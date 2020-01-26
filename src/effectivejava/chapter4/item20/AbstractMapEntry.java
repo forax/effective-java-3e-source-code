@@ -13,10 +13,9 @@ public abstract class AbstractMapEntry<K,V>
     @Override public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Map.Entry))
+        if (!(o instanceof Map.Entry<?,?> e))
             return false;
-        Map.Entry<?,?> e = (Map.Entry) o;
-        return Objects.equals(e.getKey(),   getKey())
+        return Objects.equals(e.getKey(), getKey())
                 && Objects.equals(e.getValue(), getValue());
     }
 

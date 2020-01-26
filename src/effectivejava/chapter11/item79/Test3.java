@@ -7,16 +7,15 @@ import java.util.concurrent.Executors;
 // Simple test of ObservableSet - Page 319
 public class Test3 {
     public static void main(String[] args) {
-        ObservableSet<Integer> set =
-                new ObservableSet<>(new HashSet<>());
+        var set =
+                new ObservableSet<>(new HashSet<Integer>());
 
 // Observer that uses a background thread needlessly
         set.addObserver(new SetObserver<>() {
             public void added(ObservableSet<Integer> s, Integer e) {
                 System.out.println(e);
                 if (e == 23) {
-                    ExecutorService exec =
-                            Executors.newSingleThreadExecutor();
+                    var exec = Executors.newSingleThreadExecutor();
                     try {
                         exec.submit(() -> s.removeObserver(this)).get();
                     } catch (ExecutionException | InterruptedException ex) {
@@ -28,7 +27,7 @@ public class Test3 {
             }
         });
 
-        for (int i = 0; i < 100; i++)
+        for (var i = 0; i < 100; i++)
             set.add(i);
     }
 }

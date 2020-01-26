@@ -3,20 +3,22 @@ package effectivejava.chapter2.item9.tryfinally;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class TopLine {
     // try-finally - No longer the best way to close resources! (page 34)
-    static String firstLineOfFile(String path) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(path));
+    static String firstLineOfFile(Path path) throws IOException {
+        var reader = Files.newBufferedReader(path);
         try {
-            return br.readLine();
+            return reader.readLine();
         } finally {
-            br.close();
+            reader.close();
         }
     }
 
     public static void main(String[] args) throws IOException {
-        String path = args[0];
+        var path = Path.of(args[0]);
         System.out.println(firstLineOfFile(path));
     }
 }

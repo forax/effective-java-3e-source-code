@@ -1,14 +1,7 @@
 package effectivejava.chapter2.item2.builder;
 
 // Builder Pattern  (Page 13)
-public class NutritionFacts {
-    private final int servingSize;
-    private final int servings;
-    private final int calories;
-    private final int fat;
-    private final int sodium;
-    private final int carbohydrate;
-
+public record NutritionFacts(int servingSize, int servings, int calories, int fat, int sodium, int carbohydrate) {
     public static class Builder {
         // Required parameters
         private final int servingSize;
@@ -40,16 +33,11 @@ public class NutritionFacts {
     }
 
     private NutritionFacts(Builder builder) {
-        servingSize  = builder.servingSize;
-        servings     = builder.servings;
-        calories     = builder.calories;
-        fat          = builder.fat;
-        sodium       = builder.sodium;
-        carbohydrate = builder.carbohydrate;
+        this(builder.servingSize, builder.servings, builder.calories, builder.fat, builder.sodium, builder.carbohydrate);
     }
 
     public static void main(String[] args) {
-        NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8)
+        var cocaCola = new NutritionFacts.Builder(240, 8)
                 .calories(100).sodium(35).carbohydrate(27).build();
     }
 }

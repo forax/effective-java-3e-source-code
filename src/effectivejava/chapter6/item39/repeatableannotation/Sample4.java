@@ -7,14 +7,14 @@ import java.util.List;
 public class Sample4 {
     @ExceptionTest(ArithmeticException.class)
     public static void m1() {  // Test should pass
-        int i = 0;
+        var i = 0;
         i = i / i;
     }
 
     @ExceptionTest(ArithmeticException.class)
     public static void m2() {  // Should fail (wrong exception)
-        int[] a = new int[0];
-        int i = a[1];
+        var a = new int[0];
+        var i = a[1];
     }
 
     @ExceptionTest(ArithmeticException.class)
@@ -24,7 +24,7 @@ public class Sample4 {
     @ExceptionTest(IndexOutOfBoundsException.class)
     @ExceptionTest(NullPointerException.class)
     public static void doublyBad() {
-        List<String> list = new ArrayList<>();
+        var list = new ArrayList<String>();
 
         // The spec permits this staticfactory to throw either
         // IndexOutOfBoundsException or NullPointerException

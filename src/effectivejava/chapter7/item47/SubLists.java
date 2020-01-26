@@ -33,7 +33,7 @@ public class SubLists {
 //    }
 
     public static void main(String[] args) {
-        List<String> list = Arrays.asList(args);
+        var list = List.of(args);
         SubLists.of(list).forEach(System.out::println);
     }
 }

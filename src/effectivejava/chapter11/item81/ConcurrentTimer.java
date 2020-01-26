@@ -7,11 +7,11 @@ public class ConcurrentTimer {
 
     public static long time(Executor executor, int concurrency,
                             Runnable action) throws InterruptedException {
-        CountDownLatch ready = new CountDownLatch(concurrency);
-        CountDownLatch start = new CountDownLatch(1);
-        CountDownLatch done  = new CountDownLatch(concurrency);
+        var ready = new CountDownLatch(concurrency);
+        var start = new CountDownLatch(1);
+        var done  = new CountDownLatch(concurrency);
 
-        for (int i = 0; i < concurrency; i++) {
+        for (var i = 0; i < concurrency; i++) {
             executor.execute(() -> {
                 ready.countDown(); // Tell timer we're ready
                 try {
@@ -26,7 +26,7 @@ public class ConcurrentTimer {
         }
 
         ready.await();     // Wait for all workers to be ready
-        long startNanos = System.nanoTime();
+        var startNanos = System.nanoTime();
         start.countDown(); // And they're off!
         done.await();      // Wait for all workers to finish
         return System.nanoTime() - startNanos;

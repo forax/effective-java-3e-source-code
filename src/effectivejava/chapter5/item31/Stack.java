@@ -23,7 +23,7 @@ public class Stack<E> {
     public E pop() {
         if (size==0)
             throw new EmptyStackException();
-        E result = elements[--size];
+        var result = elements[--size];
         elements[size] = null; // Eliminate obsolete reference
         return result;
     }
@@ -45,7 +45,7 @@ public class Stack<E> {
 
      // Wildcard type for parameter that serves as an E producer
     public void pushAll(Iterable<? extends E> src) {
-        for (E e : src)
+        for (var e : src)
             push(e);
     }
 
@@ -63,8 +63,8 @@ public class Stack<E> {
 
     // Little program to exercise our generic Stack
     public static void main(String[] args) {
-        Stack<Number> numberStack = new Stack<>();
-        Iterable<Integer> integers = Arrays.asList(3, 1, 4, 1, 5, 9);
+        var numberStack = new Stack<Number>();
+        Iterable<Integer> integers = List.of(3, 1, 4, 1, 5, 9);
         numberStack.pushAll(integers);
 
         Collection<Object> objects = new ArrayList<>();

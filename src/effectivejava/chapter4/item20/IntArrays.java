@@ -26,11 +26,11 @@ public class IntArrays {
     }
 
     public static void main(String[] args) {
-        int[] a = new int[10];
-        for (int i = 0; i < a.length; i++)
-            a[i] = i;
+        var array = new int[10];
+        for (var i = 0; i < array.length; i++)
+            array[i] = i;
 
-        List<Integer> list = intArrayAsList(a);
+       var list = intArrayAsList(array);
         Collections.shuffle(list);
         System.out.println(list);
     }

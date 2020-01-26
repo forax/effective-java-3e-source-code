@@ -14,28 +14,26 @@ public final class CaseInsensitiveString {
 
     // Broken - violates symmetry!
     @Override public boolean equals(Object o) {
-        if (o instanceof CaseInsensitiveString)
-            return s.equalsIgnoreCase(
-                    ((CaseInsensitiveString) o).s);
-        if (o instanceof String)  // One-way interoperability!
-            return s.equalsIgnoreCase((String) o);
+        if (o instanceof CaseInsensitiveString cis)
+            return s.equalsIgnoreCase(cis.s);
+        if (o instanceof String s2)  // One-way interoperability!
+            return s.equalsIgnoreCase(s2);
         return false;
     }
 
     // Demonstration of the problem (Page 40)
     public static void main(String[] args) {
-        CaseInsensitiveString cis = new CaseInsensitiveString("Polish");
-        String s = "polish";
+        var cis = new CaseInsensitiveString("Polish");
+        var string = "polish";
 
-        List<CaseInsensitiveString> list = new ArrayList<>();
-        list.add(cis);
+        var list = List.of(cis);
 
-        System.out.println(list.contains(s));
+        System.out.println(list.contains(string));
     }
 
 //    // Fixed equals method (Page 40)
 //    @Override public boolean equals(Object o) {
-//        return o instanceof CaseInsensitiveString &&
-//                ((CaseInsensitiveString) o).s.equalsIgnoreCase(s);
+//        return o instanceof CaseInsensitiveString cis &&
+//                cis.s.equalsIgnoreCase(s);
 //    }
 }
