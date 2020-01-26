@@ -64,3 +64,6 @@ fabric.properties
 # Editor-based Rest Client
 # .idea/httpRequests
 /bin/
+/.classpath
+/.project
+/effective-java-3e-source-code.eml
