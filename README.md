@@ -11,6 +11,7 @@ I've also added some API calls, mostly List.of/List.copyOf (I think the later wa
 
 Some edits may be surprising to you but I stand by them until you prove me wrong :)
 
+---
 
 # Effective Java, Third Edition
 ![EJ3e Book Cover](https://www.pearsonhighered.com/assets/bigcovers/0/1/3/4/0134685997.jpg)
